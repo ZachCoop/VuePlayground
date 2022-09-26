@@ -4,8 +4,8 @@
       <div class="col-12">
         <div class="border p-1">
           <div class="reverse-message">
-            <p>Original Message: {{}}</p>
-            <p>Computed Reversed Message: {{}}</p>
+            <input v-model="state.myMessage">
+            <p>Computed Reversed Message: {{state.reversedMessage}}</p>
           </div>
         </div>
       </div>
@@ -21,12 +21,14 @@ export default {
   setup() {
     // NOTE typically state will be abstracted to a global AppState
     const state = reactive({
+      myMessage: "What is your message?",
       // After getting this to work, challenge yourself to add an input field and bind message to it, so as you type the messag gets reversed!
       message: "Hello World!",
-      reversedMessage: computed(() => {
+      reversedMessage: computed(() =>
+        state.myMessage.split(" ").reverse().join(' ')
         // all computed properties must return a value, what do you want this one to return?
-        return "";
-      }),
+
+      ),
     });
     return {
       state,
@@ -37,4 +39,5 @@ export default {
 
 
 <style scoped>
+
 </style>
